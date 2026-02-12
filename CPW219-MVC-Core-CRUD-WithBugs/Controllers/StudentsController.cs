@@ -13,7 +13,7 @@ namespace CPW219_MVC_Core_CRUD_WithBugs.Controllers;
 public class StudentsController : Controller
 {
     private readonly StudentDbContext _context;
-    private const int PageSize = 5;
+    private const int PageSize = 6;
 
     public StudentsController(StudentDbContext context)
     {
