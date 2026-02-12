@@ -13,7 +13,7 @@ namespace CPW219_MVC_Core_CRUD_WithBugs.Controllers;
 public class StudentsController : Controller
 {
     private readonly StudentDbContext _context;
-    private const int PageSize = 5;
+    private const int PageSize = 6;
 
     public StudentsController(StudentDbContext context)
     {
@@ -69,7 +69,7 @@ public class StudentsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Create(Student student)
+    public async Task<IActionResult> Create(Student student)
     {
         if (ModelState.IsValid)
         {
@@ -113,6 +113,7 @@ public class StudentsController : Controller
             try
             {
                 _context.Update(student);
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -157,6 +158,7 @@ public class StudentsController : Controller
         if (student != null)
         {
             _context.Student.Remove(student);
+            await _context.SaveChangesAsync();
         }
 
         return RedirectToAction(nameof(Index));
